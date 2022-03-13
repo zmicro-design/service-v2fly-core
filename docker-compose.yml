@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  v2fly-core:
+    restart: always
+    image: whatwewant/v2fly:${SERVICE_V2FLY_CORE_VERSION}
+    environment:
+      ID: ${SERVICE_V2FLY_CORE_ID}
+      DEBUG: 'true'
+    volumes:
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+
+networks:
+  default:
+    external: true
+    name: compose-ingress

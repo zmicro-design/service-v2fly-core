@@ -1,0 +1,21 @@
+#!/bin/bash
+
+load inquirer
+
+check() {
+  if [ ! -f $SERVICE_CONFIG ]; then
+     touch $SERVICE_CONFIG
+  fi
+
+  config::load_file $SERVICE_CONFIG
+  if [ -z "$SERVICE_V2FLY_CORE_ID" ]; then
+    inquirer::text "请输入 USER ID:" value $(os::uuid)
+    config::set SERVICE_V2FLY_CORE_ID $value $SERVICE_CONFIG
+  fi
+
+  config::load_file $SERVICE_CONFIG
+
+  export SERVICE_V2FLY_CORE_ID=$SERVICE_V2FLY_CORE_ID
+}
+
+check $@
