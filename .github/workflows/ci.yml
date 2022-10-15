@@ -58,5 +58,4 @@ jobs:
       - name: Install
         run: |
           export TESTING=true
-          export SERVICE_V2FLY_CORE_ID=test
           ./install
